@@ -1,0 +1,49 @@
+{
+  "kit": "amber",
+  "pages": [
+    {
+      "name": "EG",
+      "controls": [
+        { "param": "Attack",    "widget": "knob", "polarity": "bipolar" },
+        { "param": "Decay",     "widget": "knob", "polarity": "bipolar" },
+        { "param": "Release",   "widget": "knob", "polarity": "bipolar" },
+        { "param": "Volume",    "widget": "fader" },
+        { "param": "EG Target", "widget": "switch" },
+        { "param": "Voice",     "widget": "slider" },
+        "empty",
+        { "widget": "text", "text": "YS4OP  4-OP FM" }
+      ]
+    },
+    {
+      "name": "TONE",
+      "controls": [
+        { "param": "Brilliance", "widget": "knob", "polarity": "bipolar" },
+        { "param": "Wave",       "widget": "knob", "polarity": "bipolar" },
+        "empty",
+        { "widget": "text", "text": "Input-4Nos!" },
+        { "param": "OP1 Wave", "widget": "knob" },
+        { "param": "OP2 Wave", "widget": "knob" },
+        { "param": "OP3 Wave", "widget": "knob" },
+        { "param": "OP4 Wave", "widget": "knob" }
+      ]
+    },
+    {
+      "name": "LFO",
+      "controls": [
+        { "param": "LFO Speed", "widget": "knob" },
+        { "param": "Vibrato",   "widget": "knob" },
+        { "param": "Tremolo",   "widget": "knob" },
+        "empty"
+      ]
+    },
+    {
+      "name": "EFFECT",
+      "controls": [
+        { "param": "Effect",     "widget": "slider", "overlay": "menu" },
+        { "param": "FX Time",    "widget": "knob" },
+        { "param": "FX Balance", "widget": "fader" },
+        "empty"
+      ]
+    }
+  ]
+}

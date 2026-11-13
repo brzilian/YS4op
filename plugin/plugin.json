@@ -1,0 +1,17 @@
+{
+  "name": "YS4OP",
+  "manufacturer": "OliveTreeDesign",
+  "version": "1.1.0",
+  "format": "vst2",
+  "kind": "instrument",
+  "uid": "OiT3",
+  "numInputs": 0,
+  "numOutputs": 2,
+  "category": "Synth",
+  "file32": "VST/ys4op-arm32.so",
+  "file64": "VST/ys4op-arm64.so",
+  "description": "4-operator FM synthesizer, 16 voices, sysex compatible with the Yamaha YS200 (VMEM/VCED/ACED/ACED2/EFEDS). 100 YS200 ROM voices, Easy Edit controls and the 10 YS200 effect presets.",
+  "author": "OliveTreeDesign",
+  "url": "",
+  "license": "MIT"
+}

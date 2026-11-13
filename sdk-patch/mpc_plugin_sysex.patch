@@ -1,0 +1,32 @@
+diff --git a/framework/mpc_plugin.h b/framework/mpc_plugin.h
+index dbf239b..19e96f8 100644
+--- a/framework/mpc_plugin.h
++++ b/framework/mpc_plugin.h
+@@ -355,6 +355,11 @@ public:
+     virtual void saveExtraState(std::vector<uint8_t>& out) { (void)out; }
+     virtual void loadExtraState(const uint8_t* data, size_t size) { (void)data; (void)size; }
+     // Optional: custom value text. Return false to use the default formatting.
++    // System exclusive message received (instruments only), F0 ... F7 included. Called before the next
++    // process() block, possibly from a non-audio thread: copy the bytes into preallocated storage, do not
++    // allocate, lock or touch audio state here.
++    virtual void sysexReceived(const uint8_t* data, size_t size, int sampleOffset) { (void)data; (void)size; (void)sampleOffset; }
++
+     virtual bool formatValue(int index, float plainValue, std::string& out) { (void)index; (void)plainValue; (void)out; return false; }
+ 
+     // ----- parameter declaration (call from your constructor) --------------
+@@ -426,6 +431,15 @@ public:
+         for (int i = 0; i < events->numEvents; ++i)
+         {
+             const VstEvent* ev = events->events[i];
++            if (ev != nullptr && ev->type == kVstSysExType)
++            {
++                // System exclusive: handed to the plugin immediately (the buffer is only valid now).
++                const VstMidiSysexEvent* se = reinterpret_cast<const VstMidiSysexEvent*>(ev);
++                if (se->sysexDump != nullptr && se->dumpBytes > 0)
++                    sysexReceived(reinterpret_cast<const uint8_t*>(se->sysexDump), (size_t)se->dumpBytes,
++                                  se->deltaFrames < 0 ? 0 : (int)se->deltaFrames);
++                continue;
++            }
+             if (ev == nullptr || ev->type != kVstMidiType) continue;
+             const VstMidiEvent* me = reinterpret_cast<const VstMidiEvent*>(ev);
+             if (numMidiIn_ >= kMaxMidiEvents) break;
